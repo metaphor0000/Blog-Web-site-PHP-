@@ -52,6 +52,26 @@ Class AdminBlog {
         }
     }
 
+    public function display_cat(){
+        
+        $query="select * from category";
+
+        if(mysqli_query($this->conn,$query)){
+            $category = mysqli_query($this->conn,$query);
+            return $category;
+        }
+    }
+
+    public function deleteCat($id){
+        $query = "DELETE FROM category WHERE cat_id=$id";
+
+        if (mysqli_query($this->conn, $query)) {
+            return "Category Deleted"; 
+        } else {
+            return "Error deleting data: " . mysqli_error($this->conn);
+        }
+    }
+
 }
 
 ?>

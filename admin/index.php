@@ -1,5 +1,11 @@
 <?php 
 
+session_start();
+$id=$_SESSION['adminID'];
+if($id){
+    header("location:dashboard.php");
+}
+
 include("class/function.php");
 
 $obj = new AdminBlog();

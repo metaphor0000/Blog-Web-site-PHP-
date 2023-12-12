@@ -1,8 +1,10 @@
 <?php 
 
 session_start();
-$id=$_SESSION['adminID'];
-if($id){
+if(isset($_SESSION['adminID'])){
+    $id=$_SESSION['adminID'];
+}
+if(isset($id)){
     header("location:dashboard.php");
 }
 

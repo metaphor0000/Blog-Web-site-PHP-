@@ -1,8 +1,15 @@
 <?php include("class/function.php");
+    $obj = new AdminBlog();
     session_start();
     $id=$_SESSION['adminID'];
     if(!$id){
         header("location:index.php");
+    }
+
+    if(isset($_GET['adminLogout'])){
+        if($_GET['adminLogout']=='Logout'){
+            $obj->adminLogout();
+        }
     }
 ?>
 <?php include_once("includes/head.php") ?>

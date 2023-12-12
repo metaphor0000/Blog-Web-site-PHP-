@@ -35,6 +35,23 @@ Class AdminBlog {
         }
     }
 
+    public function adminLogout(){
+        unset($_SESSION['adminID']);
+        unset($_SESSION['adminName']);
+        header('location:index.php');
+    }
+
+    public function add_cat($data){
+        $cat_name = $data['cat_name'];
+        $cat_des = $data['cat_des'];
+
+        $query="insert into category(cat_name,cat_des) values('$cat_name','$cat_des')";
+
+        if(mysqli_query($this->conn,$query)){
+            return "Inserted";
+        }
+    }
+
 }
 
 ?>

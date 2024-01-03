@@ -72,6 +72,49 @@ Class AdminBlog {
         }
     }
 
+    public function add_post($data){
+        $post_title = $data['post_title'];
+        $post_content = $data['post_content'];
+        $post_img = $_FILES['post_img']['name'];
+        $post_img_tmp = $_FILES['post_img']['tmp_name'];
+        $post_ctg = $data['post_cats'];
+        $post_summary = $data['post_summary'];
+        $post_tag= $data['post_tag'];
+        $post_status= $data['post_status'];
+
+
+        $query = "INSERT INTO posts(post_title,post_content,post_img,
+        post_ctg,post_author,post_date,post_comment_count,post_summary,
+        post_tag,post_status) 
+        VALUE('$post_title','$post_content','$post_img',$post_ctg,
+        'Admin',now(),3,'$post_summary','$post_tag',$post_status)";
+
+        if(mysqli_query($this->conn, $query)){
+            move_uploaded_file($post_img_tmp, '../upload/'.$post_img);
+            return "Post Added Successfully";
+        }
+    }
+
+    public function display_post(){
+        
+        $query="SELECT * FROM `new_view` ";
+
+        if(mysqli_query($this->conn,$query)){
+            $posts = mysqli_query($this->conn,$query);
+            return $posts;
+        }
+    }
+
+    public function display_public_post(){
+        
+        $query="SELECT * FROM new_view ";
+
+        if(mysqli_query($this->conn,$query)){
+            $posts = mysqli_query($this->conn,$query);
+            return $posts;
+        }
+    }
+
 }
 
 ?>

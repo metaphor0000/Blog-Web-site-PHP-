@@ -115,6 +115,44 @@ Class AdminBlog {
         }
     }
 
+    public function edit_img($data){
+        $id = $data['editimg_id'];
+        $img_name = $_FILES['change_img']['name'];
+        $tmp_name = $_FILES['change_img']['tmp_name'];
+        
+
+
+        $query = "update posts set post_img='$img_name' where post_id=$id";
+
+        if(mysqli_query($this->conn, $query)){
+            move_uploaded_file($tmp_name, '../upload/'.$img_name);
+            return "Post Added Successfully";
+        }
+    }
+
+    public function edit_post($data){
+        $id = $data['edittitle_id'];
+        $post_title = $data['edit_title'];
+        $post_content = $data['edit_content'];
+        
+        $query = "update posts set post_title='$post_title',post_content='$post_content'
+         where post_id=$id";
+
+        if(mysqli_query($this->conn, $query)){
+            return "Post Added Successfully";
+        }
+    }
+
+    public function del_post($id){
+        $query = "DELETE FROM posts WHERE post_id=$id";
+
+        if (mysqli_query($this->conn, $query)) {
+            return "Category Deleted"; 
+        } else {
+            return "Error deleting data: " . mysqli_error($this->conn);
+        }
+    }
+
 }
 
 ?>

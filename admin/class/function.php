@@ -153,6 +153,19 @@ Class AdminBlog {
         }
     }
 
+    public function get_post_info($id){
+        
+        $query="SELECT * FROM new_view where post_id=$id ";
+
+        if(mysqli_query($this->conn,$query)){
+            $postinfo = mysqli_query($this->conn,$query);
+            $post = mysqli_fetch_assoc($postinfo);
+            return $post;
+        }
+    }
+
+
+
 }
 
 ?>
